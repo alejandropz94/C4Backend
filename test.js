@@ -51,8 +51,6 @@ it('create user', async () => {
       `,
     });
   
-    assert.equal(result.data.Usuarios.length, 4);
-  
     assert.equal(result.data.Usuarios[0].nombre, 'Luis');
   });
 
