@@ -14,27 +14,27 @@ const server = new ApolloServer({
   resolvers: resolvers,
 });
 
-it('create user', async () => {
-    const result = await server.executeOperation({
-      query: gql`
-      mutation Mutation($nombre: String!, $apellido: String!, $identificacion: String!, $correo: String!, $rol: Enum_rol!, $password: String!) {
-        crearUsuario(nombre: $nombre, apellido: $apellido, identificacion: $identificacion, correo: $correo, rol: $rol, password: $password) {
-            correo
-        }
-      }
-      `,
-      variables: {
-        nombre: 'test ciclo 4',
-        apellido: 'test',
-        identificacion: 'test',
-        correo: 'testing@testing.com',
-        rol: 'ADMINISTRADOR',
-        password: 'test',
-      },
-    });
+// it('create user', async () => {
+//     const result = await server.executeOperation({
+//       query: gql`
+//       mutation Mutation($nombre: String!, $apellido: String!, $identificacion: String!, $correo: String!, $rol: Enum_rol!, $password: String!) {
+//         crearUsuario(nombre: $nombre, apellido: $apellido, identificacion: $identificacion, correo: $correo, rol: $rol, password: $password) {
+//             correo
+//         }
+//       }
+//       `,
+//       variables: {
+//         nombre: 'test ciclo 4',
+//         apellido: 'test',
+//         identificacion: 'test',
+//         correo: 'testing@testing.com',
+//         rol: 'ADMINISTRADOR',
+//         password: 'test',
+//       },
+//     });
   
-    assert.equal(result.data.crearUsuario.correo, 'testing@testing.com');
-  });
+//     assert.equal(result.data.crearUsuario.correo, 'testing@testing.com');
+//   });
 
 
   it('Consultar Usuarios', async () => {
@@ -90,22 +90,22 @@ it('Consultar Proyectos', async () => {
     assert.notEqual(result.data.getAllProjects.length, 0);
   });
 
-  it('Eliminar Usuario', async () => {
-    const result = await server.executeOperation({
-      query: gql`
-        mutation Mutation($id: String!) {
-          eliminarUsuario(_id: $id) {
-            correo
-          }
-        }
-      `,
-      variables: {
-        id : "61bd3aab427cc0b859f87f07"
-      },
-    });
+  // it('Eliminar Usuario', async () => {
+  //   const result = await server.executeOperation({
+  //     query: gql`
+  //       mutation Mutation($id: String!) {
+  //         eliminarUsuario(_id: $id) {
+  //           correo
+  //         }
+  //       }
+  //     `,
+  //     variables: {
+  //       id : "61bd3aab427cc0b859f87f07"
+  //     },
+  //   });
   
-    assert.equal(result.data.eliminarUsuario.correo, 'testing@testing.com');
-  });
+  //   assert.equal(result.data.eliminarUsuario.correo, 'testing@testing.com');
+  // });
  
   it('Proyecto por id', async () => {
     const result = await server.executeOperation({
@@ -145,35 +145,35 @@ it('Proyecto por lider', async () => {
   assert.equal(result.data.getProjectsByLider[0].nombre, 'proyecto');
 });
 
-it('Crear proyecto', async () => {
-  const result = await server.executeOperation({
-    query: gql`
-    mutation Mutation($input: ProjectInput) {
-      createProject(input: $input) {
-        nombre
-        presupuesto
-        fechaInicio
-        fechaFin
-        estado
-        fase
-        lider {
-          _id
-        }
-      }
-    }`,
-    variables: {
-      input: {
-        nombre: "Proyecto test",
-        presupuesto: 10000000,
-        fechaInicio: "11/12/2021",
-        estado: "Activo",
-        fase: "Null",
-        lider: "61bb7e68309a05653aa5b284"
-      }
-  }
-  });
-  assert.equal(result.data.createProject.nombre, 'Proyecto test');
-});
+// it('Crear proyecto', async () => {
+//   const result = await server.executeOperation({
+//     query: gql`
+//     mutation Mutation($input: ProjectInput) {
+//       createProject(input: $input) {
+//         nombre
+//         presupuesto
+//         fechaInicio
+//         fechaFin
+//         estado
+//         fase
+//         lider {
+//           _id
+//         }
+//       }
+//     }`,
+//     variables: {
+//       input: {
+//         nombre: "Proyecto test",
+//         presupuesto: 10000000,
+//         fechaInicio: "11/12/2021",
+//         estado: "Activo",
+//         fase: "Null",
+//         lider: "61bb7e68309a05653aa5b284"
+//       }
+//   }
+//   });
+//   assert.equal(result.data.createProject.nombre, 'Proyecto test');
+// });
 
 it('Avance por id', async () => {
   const result = await server.executeOperation({
